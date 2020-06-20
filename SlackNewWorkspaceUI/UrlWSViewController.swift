@@ -9,4 +9,20 @@ import UIKit
 
 final class UrlWSViewController: UIViewController {
   
+  // MARK: LifeCycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+  }
+  
+  // MARK: Layout
+  
+  private func setupUI() {
+    let safeView = self.view.safeAreaLayoutGuide
+    
+  }
+  
+  // MARK: Action
+  
 }
