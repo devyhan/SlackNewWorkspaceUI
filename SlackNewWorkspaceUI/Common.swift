@@ -24,31 +24,30 @@ struct CommonUI {
         return VC
     }
     // UILabel
-    static func contantsLabel(for uiView: UILabel, title: String?, fontColor: UIColor,  textAlignment: NSTextAlignment?, addView: UIView) {
-        uiView.text = title ?? ""
-        uiView.textAlignment = textAlignment ?? .center
-        uiView.font = UIFont.boldSystemFont(ofSize: contantsFontSize - 5)
-        uiView.textColor = fontColor
+    static func contantsLabel(for uiLable: UILabel, title: String?, fontColor: UIColor,  textAlignment: NSTextAlignment?, where uiView: UIView) {
+        uiLable.text = title ?? ""
+        uiLable.textAlignment = textAlignment ?? .center
+        uiLable.font = UIFont.boldSystemFont(ofSize: contantsFontSize - 5)
         
-        addView.addSubview(uiView)
+        uiView.addSubview(uiLable)
     }
     // UIButton
-    static func defaultButton(for uiButton: UIButton, title: String, titleColor: UIColor, addView: UIView) {
+    static func defaultButton(for uiButton: UIButton, title: String, titleColor: UIColor, where uiView: UIView) {
         uiButton.setTitle(title, for: .normal)
         uiButton.layer.cornerRadius = 4
         uiButton.setTitleColor(titleColor, for: .normal)
         
-        addView.addSubview(uiButton)
+        uiView.addSubview(uiButton)
     }
     // UITextField
-    static func defaultTextField(for uiTextField: UITextField, placeholder: String, textAlignment: NSTextAlignment, keyboardType: UIKeyboardType, addView: UIView) {
+    static func defaultTextField(for uiTextField: UITextField, placeholder: String, textAlignment: NSTextAlignment, keyboardType: UIKeyboardType, where uiView: UIView) {
         uiTextField.placeholder = placeholder
         uiTextField.textAlignment = textAlignment
         uiTextField.keyboardType = keyboardType
         uiTextField.font = UIFont.boldSystemFont(ofSize: contantsFontSize)
         uiTextField.textColor = .black
         
-        addView.addSubview(uiTextField)
+        uiView.addSubview(uiTextField)
     }
     // Animation
     static func showUpAnimation(for uiLabel: UILabel, showUPAnimationEnable: Bool) {
