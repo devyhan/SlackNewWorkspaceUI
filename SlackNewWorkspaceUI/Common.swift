@@ -17,20 +17,20 @@ struct CommonUI {
   static let contantsFontSize: CGFloat = 20
   
   // Navigation
-  static func navigationViewController(scene: Int) -> UIViewController {
+  static func navigationViewController(scene: UIViewController) -> UIViewController {
     switch scene {
-    case 1:
-      let createNewWSViewController = CreateNewWSViewController()
-      let createNewWSVC = UINavigationController(rootViewController: createNewWSViewController)
-      return createNewWSVC
-    case 2:
+    case is UrlWSViewController:
+      let urlWSViewController = UrlWSViewController()
+      let urlWSVC = UINavigationController(rootViewController: urlWSViewController)
+      return urlWSVC
+    case is NameWSViewController:
       let nameWSViewController = NameWSViewController()
       let nameWSVC = UINavigationController(rootViewController: nameWSViewController)
       return nameWSVC
     default:
-      let urlWSViewController = UrlWSViewController()
-      let urlWSVC = UINavigationController(rootViewController: urlWSViewController)
-      return urlWSVC
+      let createNewWSViewController = CreateNewWSViewController()
+      let createNewWSVC = UINavigationController(rootViewController: createNewWSViewController)
+      return createNewWSVC
     }
     
   }

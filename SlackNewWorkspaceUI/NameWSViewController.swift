@@ -9,7 +9,7 @@ import UIKit
 
 final class NameWSViewController: UIViewController {
   
-  private let urlWSViewController = CommonUI.navigationViewController(scene: 3)
+  private let urlWSViewController = CommonUI.navigationViewController(scene: UrlWSViewController())
   private var uiChangeConstraint: NSLayoutConstraint?
   private var uiChangeAnimation: NSLayoutConstraint?
   private let writeWorkspace = UITextField()

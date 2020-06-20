@@ -65,7 +65,7 @@ final class UrlWSViewController: UIViewController {
       case 2: // Change the background color to red.
         self.view.window?.rootViewController?.dismiss(animated: true, completion: {
           
-          let dashBoardVC = CommonUI.navigationViewController(scene: 1)
+          let dashBoardVC = CommonUI.navigationViewController(scene: CreateNewWSViewController())
           dashBoardVC.modalPresentationStyle = .fullScreen
           let appDelegate = UIApplication.shared.delegate as! AppDelegate
           appDelegate.window?.rootViewController?.present(dashBoardVC, animated: true, completion: nil)

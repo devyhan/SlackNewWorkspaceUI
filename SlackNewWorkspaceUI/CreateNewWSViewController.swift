@@ -10,7 +10,7 @@ import UIKit
 
 final class CreateNewWSViewController: UIViewController {
   
-  private let nameWSViewController = CommonUI.navigationViewController(scene: 2)
+  private let nameWSViewController = CommonUI.navigationViewController(scene: NameWSViewController())
   
   // MARK: LifeCycle
   
