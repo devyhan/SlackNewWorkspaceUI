@@ -9,56 +9,55 @@ import AudioToolbox.AudioServices
 import UIKit
 
 final class CreateNewWSViewController: UIViewController {
+  
+  private let nameWSViewController = CommonUI.navigationViewController(scene: 2)
+  
+  // MARK: LifeCycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    private let nameWSViewController = NameWSViewController()
+    setupUI()
     
-    // MARK: LifeCycle
+  }
+  
+  // MARK: UI
+  
+  private func setupUI() {
+    let safeView = self.view.safeAreaLayoutGuide
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        view.backgroundColor = .systemGray
+    view.backgroundColor = .white
+    
+    // Navigation
+    navigationController?.navigationBar.isHidden = true
+    
+    // UIButton
+    let didChangeVCButton = UIButton()
+    didChangeVCButton.addTarget(self, action: #selector(didTabButton(_:)), for: .touchUpInside)
+    // Attribute
+    CommonUI.defaultButton(
+      for: didChangeVCButton,
+      title: CommonUI.didChangeVCButtonText,
+      titleColor: .systemBlue,
+      where: view
+    )
+    // Layout
+    didChangeVCButton.translatesAutoresizingMaskIntoConstraints.toggle()
+    NSLayoutConstraint.activate([
+      didChangeVCButton.leadingAnchor.constraint(equalTo: safeView.leadingAnchor, constant: CommonUI.margin),
+      didChangeVCButton.trailingAnchor.constraint(equalTo: safeView.trailingAnchor, constant: -CommonUI.margin),
+      didChangeVCButton.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
+    ])
+  }
+  
+  // MARK: Action
+  
+  @objc private func didTabButton(_ sender: UIButton) {
+    AudioServicesPlayAlertSoundWithCompletion(kSystemSoundID_Vibrate) {
+      print("진동발생")
     }
     
-    // MARK: UI
-    
-    private func setupUI() {
-        let safeView = self.view.safeAreaLayoutGuide
-        
-        // UIButton
-        let didChangeVCButton = UIButton()
-        didChangeVCButton.addTarget(self, action: #selector(didTabButton(_:)), for: .touchUpInside)
-        // Attribute
-        CommonUI.defaultButton(
-            for: didChangeVCButton,
-            title: CommonUI.didChangeVCButtonText,
-            titleColor: .systemBlue,
-            where: view
-        )
-        // Layout
-        didChangeVCButton.translatesAutoresizingMaskIntoConstraints.toggle()
-        NSLayoutConstraint.activate([
-            didChangeVCButton.leadingAnchor.constraint(equalTo: safeView.leadingAnchor, constant: CommonUI.margin),
-            didChangeVCButton.trailingAnchor.constraint(equalTo: safeView.trailingAnchor, constant: -CommonUI.margin),
-            didChangeVCButton.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
-        ])
-    }
-    
-    // MARK: Action
-    
-    @objc private func didTabButton(_ sender: UIButton) {
-        // 진동
-        AudioServicesPlayAlertSoundWithCompletion(kSystemSoundID_Vibrate) {
-            print("진동발생")
-        }
-        
-            let VC = CommonUI.navigationViewController()
-        VC.modalPresentationStyle = .fullScreen
-//        nameWSViewController.modalTransitionStyle = .
-        present(VC, animated: true)
-        
-        
-        // 텍스트 크기
-        //        ("ASDF" as NSString).size(withAttributes: <#T##[NSAttributedString.Key : Any]?#>)
-    }
+    nameWSViewController.modalPresentationStyle = .fullScreen
+    present(nameWSViewController, animated: true)
+  }
 }
