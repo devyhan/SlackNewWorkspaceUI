@@ -10,20 +10,26 @@ import UIKit
 
 final class CreateNewWSViewController: UIViewController {
   
-  private let nameWSViewController = NameWSViewController()
+  private let nameWSViewController = CommonUI.navigationViewController(scene: 2)
   
   // MARK: LifeCycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setupUI()
-    view.backgroundColor = .systemGray
+    
   }
   
   // MARK: UI
   
   private func setupUI() {
     let safeView = self.view.safeAreaLayoutGuide
+    
+    view.backgroundColor = .white
+    
+    // Navigation
+    navigationController?.navigationBar.isHidden = true
     
     // UIButton
     let didChangeVCButton = UIButton()
@@ -47,18 +53,11 @@ final class CreateNewWSViewController: UIViewController {
   // MARK: Action
   
   @objc private func didTabButton(_ sender: UIButton) {
-    // 진동
     AudioServicesPlayAlertSoundWithCompletion(kSystemSoundID_Vibrate) {
       print("진동발생")
     }
     
-    let VC = CommonUI.navigationViewController()
-    VC.modalPresentationStyle = .fullScreen
-    //        nameWSViewController.modalTransitionStyle = .
-    present(VC, animated: true)
-    
-    
-    // 텍스트 크기
-    //        ("ASDF" as NSString).size(withAttributes: <#T##[NSAttributedString.Key : Any]?#>)
+    nameWSViewController.modalPresentationStyle = .fullScreen
+    present(nameWSViewController, animated: true)
   }
 }

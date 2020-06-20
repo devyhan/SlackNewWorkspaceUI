@@ -17,11 +17,22 @@ struct CommonUI {
   static let contantsFontSize: CGFloat = 20
   
   // Navigation
-  static func navigationViewController() -> UIViewController {
-    let nameWSViewController = NameWSViewController()
-    let VC = UINavigationController(rootViewController: nameWSViewController)
+  static func navigationViewController(scene: Int) -> UIViewController {
+    switch scene {
+    case 1:
+      let createNewWSViewController = CreateNewWSViewController()
+      let createNewWSVC = UINavigationController(rootViewController: createNewWSViewController)
+      return createNewWSVC
+    case 2:
+      let nameWSViewController = NameWSViewController()
+      let nameWSVC = UINavigationController(rootViewController: nameWSViewController)
+      return nameWSVC
+    default:
+      let urlWSViewController = UrlWSViewController()
+      let urlWSVC = UINavigationController(rootViewController: urlWSViewController)
+      return urlWSVC
+    }
     
-    return VC
   }
   // UILabel
   static func contantsLabel(for uiLable: UILabel, title: String?, fontColor: UIColor,  textAlignment: NSTextAlignment?, where uiView: UIView) {

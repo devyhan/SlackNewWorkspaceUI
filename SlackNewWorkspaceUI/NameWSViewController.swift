@@ -9,12 +9,11 @@ import UIKit
 
 final class NameWSViewController: UIViewController {
   
+  private let urlWSViewController = CommonUI.navigationViewController(scene: 3)
   private var uiChangeConstraint: NSLayoutConstraint?
   private var uiChangeAnimation: NSLayoutConstraint?
   private let writeWorkspace = UITextField()
   private let textFieldAnimationLabel = UILabel()
-  
-  private let leftBarButton = UIBarButtonItem()
   
   lazy var leftButton: UIBarButtonItem = {
     let button = UIBarButtonItem(
@@ -56,6 +55,14 @@ final class NameWSViewController: UIViewController {
     let safeView = self.view.safeAreaLayoutGuide
     
     view.backgroundColor = .white
+    
+    // Navigation
+    navigationItem.leftBarButtonItem = self.leftButton
+    navigationItem.rightBarButtonItem = self.rightButton
+    navigationController?.navigationBar.tintColor = .black
+    navigationController?.navigationBar.barTintColor = .white
+    navigationController?.navigationBar.shadowImage = UIImage()
+    
     writeWorkspace.delegate = self
     
     // Attribute
@@ -87,12 +94,6 @@ final class NameWSViewController: UIViewController {
       textFieldAnimationLabel.leadingAnchor.constraint(equalTo: writeWorkspace.leadingAnchor)
     ])
     
-    navigationItem.leftBarButtonItem = self.leftButton
-    navigationItem.rightBarButtonItem = self.rightButton
-    navigationController?.navigationBar.tintColor = .black
-    navigationController?.navigationBar.barTintColor = .white
-    navigationController?.navigationBar.shadowImage = UIImage()
-    
     uiChangeConstraint = writeWorkspace.centerYAnchor.constraint(equalTo: safeView.centerYAnchor)
     uiChangeConstraint?.isActive = true
     
@@ -113,10 +114,11 @@ final class NameWSViewController: UIViewController {
   @objc func buttonPressed(_ sender: Any) {
     if let button = sender as? UIBarButtonItem {
       switch button.tag {
-      case 1: // Change the background color to blue.
-        self.view.backgroundColor = .blue
-      case 2: // Change the background color to red.
-        self.view.backgroundColor = .red
+      case 1:
+        dismiss(animated: false)
+      case 2:
+        urlWSViewController.modalPresentationStyle = .fullScreen
+        present(urlWSViewController, animated: true)
       default: print("error")
       }
     }
