@@ -14,6 +14,8 @@ final class NameWSViewController: UIViewController {
     private let writeWorkspace = UITextField()
     private let textFieldAnimationLabel = UILabel()
     
+    private let leftBarButton = UIBarButtonItem()
+    
     lazy var leftButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             barButtonSystemItem: .stop,
@@ -68,7 +70,7 @@ final class NameWSViewController: UIViewController {
             placeholder: CommonUI.writeWorkspacePlaceholder,
             textAlignment: .left,
             keyboardType: .default,
-            addView: view
+            where: view
         )
         // Layout
         writeWorkspace.translatesAutoresizingMaskIntoConstraints.toggle()
@@ -82,7 +84,7 @@ final class NameWSViewController: UIViewController {
             title: CommonUI.writeWorkspacePlaceholder,
             fontColor: .black,
             textAlignment: .left,
-            addView: view
+            where: view
         )
         textFieldAnimationLabel.translatesAutoresizingMaskIntoConstraints.toggle()
         NSLayoutConstraint.activate([
@@ -125,10 +127,6 @@ final class NameWSViewController: UIViewController {
 
 extension NameWSViewController: UITextFieldDelegate {
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
@@ -138,24 +136,28 @@ extension NameWSViewController: UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if writeWorkspace.text!.isEmpty == false  {
             CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: true)
+            rightButton.isEnabled = true
         } else {
            CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: false)
+            rightButton.isEnabled = false
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if writeWorkspace.text!.isEmpty == true {
             self.textFieldAnimationLabel.alpha = 0
+            rightButton.isEnabled = false
         } else {
             CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: true)
+            rightButton.isEnabled = true
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         CommonUI.showUpAnimation(for: textFieldAnimationLabel, showUPAnimationEnable: false)
+        rightButton.isEnabled = false
     }
 }

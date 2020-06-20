@@ -33,7 +33,7 @@ final class CreateNewWSViewController: UIViewController {
             for: didChangeVCButton,
             title: CommonUI.didChangeVCButtonText,
             titleColor: .systemBlue,
-            addView: view
+            where: view
         )
         // Layout
         didChangeVCButton.translatesAutoresizingMaskIntoConstraints.toggle()
